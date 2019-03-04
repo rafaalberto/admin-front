@@ -11,7 +11,7 @@
                <li class="dropdown user user-menu">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                   <span class="hidden-xs text-font">
-                     <em class="fa fa-user"><span class="text-font">&nbsp;&nbsp;Administrador</span></em>
+                     <em class="fa fa-user"><span class="text-font">&nbsp;&nbsp;{{ user.name }}</span></em>
                   </span>
                   </a>
                   <ul class="dropdown-menu">
