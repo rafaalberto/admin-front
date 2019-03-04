@@ -1,14 +1,14 @@
-import 'font-awesome/css/font-awesome.css'
 import 'vue2-admin-lte/src/lib/css'
 import 'vue2-admin-lte/src/lib/script'
-import 'vue2-admin-lte/src/lib/global'
+import './fonts/google-fonts.css'
 
 import Vue from 'vue'
 import App from './App.vue'
+import BootstrapVue from 'bootstrap-vue'
 
-// import './config/bootstrap'
+Vue.use(BootstrapVue)
+
 import './config/messages'
-
 import router from './config/router'
 import store from './config/store'
 

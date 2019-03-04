@@ -10,7 +10,9 @@
             <ul class="nav navbar-nav">
                <li class="dropdown user user-menu">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  <span class="hidden-xs"><em class="fa fa-user">&nbsp;&nbsp;Administrador</em></span>
+                  <span class="hidden-xs text-font">
+                     <em class="fa fa-user"><span class="text-font">&nbsp;&nbsp;Administrador</span></em>
+                  </span>
                   </a>
                   <ul class="dropdown-menu">
                      <li class="user-footer">

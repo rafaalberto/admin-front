@@ -47,8 +47,8 @@
 </template>
 
 <script>
-// import axios from 'axios'
-// import { baseApiUrl, showError } from '@/global'
+import axios from 'axios'
+import { baseApiUrl, showError } from '@/global'
 export default {
     name: 'UserForm',
     props: {
@@ -62,23 +62,23 @@ export default {
     },
     methods: {
       save() {
-        // const method = this.user.id ? 'put' : 'post'
-        // const id = this.user.id ? `${this.user.id}` : ''
-        // const url = `${baseApiUrl}/users/${id}`
-        // axios[method](url, this.user)
-        //   .then(() => {
-        //     this.$toasted.global.defaultSuccess()
-        //     this.$router.push({ path: '/user' })
-        //   }).catch(showError)
+        const method = this.user.id ? 'put' : 'post'
+        const id = this.user.id ? `${this.user.id}` : ''
+        const url = `${baseApiUrl}/users/${id}`
+        axios[method](url, this.user)
+          .then(() => {
+            this.$toasted.global.defaultSuccess()
+            this.$router.push({ path: '/user' })
+          }).catch(showError)
       },
       back() {
         this.$router.push({ path: '/user' })
       },
       loadUser() {
-        // const url = `${baseApiUrl}/users/${this.user.id}`
-        // axios.get(url)
-        //   .then(res => this.user = res.data)
-        //   .catch(showError)
+        const url = `${baseApiUrl}/users/${this.user.id}`
+        axios.get(url)
+          .then(res => this.user = res.data)
+          .catch(showError)
       }
     },
     mounted() {
@@ -91,6 +91,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>
