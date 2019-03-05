@@ -5,6 +5,7 @@
          <Menu v-if="user" />
          <Loading v-if="validToken" />
          <Content v-else />
+         <Modal></Modal>
       </div>
    </div>
 </template>
@@ -16,10 +17,11 @@
    import Menu from '@/components/template/Menu'
    import Loading from '@/components/template/Loading'
    import Content from '@/components/template/Content'
-   
+   import Modal from '@/components/template/Modal'
+
    export default {
      name: 'App',
-     components: { Header, Menu, Loading, Content },
+     components: { Header, Menu, Loading, Content, Modal },
      computed: mapState(['user']),
      data() {
        return {

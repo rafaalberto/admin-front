@@ -11,7 +11,9 @@ Vue.use(BootstrapVue)
 import './config/messages'
 import router from './config/router'
 import store from './config/store'
+import EventBus from './config/eventBus'
 
+Vue.prototype.$bus = EventBus
 Vue.config.productionTip = false
 
 new Vue({

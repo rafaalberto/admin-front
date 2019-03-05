@@ -1,6 +1,7 @@
 <template>
    <div>
       <h3 class="title">Cadastro de Usuários</h3>
+      <br>
       <div class="box box-default">
          <div class="box-header with-border">
             <h3 class="box-title" style="color: gray;"><i class="fa fa-edit"></i> &nbsp;Cadastro</h3>

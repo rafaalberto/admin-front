@@ -52,7 +52,7 @@
                </template>
                <template slot="delete" slot-scope="data">
                   <div class="text-center-align">
-                     <b-button class="mr-2 btn btn-default" @click="remove(data.item)"><i class="fa fa-remove"></i></b-button>
+                     <b-button class="mr-2 btn btn-default" @click="openDeleteModal(data.item)"><i class="fa fa-remove"></i></b-button>
                   </div>
                </template>
             </b-table>
@@ -114,7 +114,23 @@ export default {
                     this.fetchUsers()
                 })
                 .catch(showError)
-        }
+        },
+        openDeleteModal(item) {
+            this.$bus.$emit('modal-open', {
+            title: 'Exclusão',
+            description: 'Deseja realmente excluir este registro?',
+            type: 'modal-primary',
+            confirmText: 'Confirmar',
+            cancelText: 'Cancelar',
+            confirmBefore: ()=> {},
+            confirmAfter: () => {
+               this.remove(item)
+            },
+            cancelBefore: () => {},
+            cancelAfter: () => {},
+            clickOverlay: () => {}
+            })
+        },
     },
     mounted() {
         this.fetchUsers()
@@ -128,4 +144,4 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="css"></style>
