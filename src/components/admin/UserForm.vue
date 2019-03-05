@@ -1,49 +1,58 @@
 <template>
-    <div>
-        <h3 class="title">Cadastro de Usuários</h3>
-        <hr>
-        <form>
-            <div class="form-group row" v-if="userId">
-              <label for="name" class="col-sm-2 col-form-label">ID</label>
-                <div class="col-sm-2">
-                  <input type="text" class="form-control" id="id" ref="id" v-model="user.id" readonly>
-                </div>
+   <div>
+      <h3 class="title">Cadastro de Usuários</h3>
+      <div class="box box-default">
+         <div class="box-header with-border">
+            <h3 class="box-title" style="color: gray;"><i class="fa fa-edit"></i> &nbsp;Cadastro</h3>
+         </div>
+         <div>
+            <p></p><b>&nbsp;&nbsp;(*)</b>&nbsp;Preenchimento obrigatório<p></p>
+         </div>
+         <form class="form-horizontal">
+            <div class="box-body">
+               <div class="form-group" v-if="userId">
+                  <label class="col-sm-2 control-label" for="id">ID</label>
+                  <div class="col-sm-2">
+                     <input type="text" class="form-control" id="id" name="id" readonly="readonly" v-model="user.id" ref="id">
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label class="col-sm-2 control-label" for="name">Nome<b class="required-field"> *</b></label>
+                  <div class="col-sm-4">
+                     <input type="text" class="form-control" id="name" name="name" v-model="user.name" ref="name">
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label class="col-sm-2 control-label" for="username">Usuário<b class="required-field"> *</b></label>
+                  <div class="col-sm-4">
+                     <input type="text" class="form-control" id="username" name="username" v-model="user.username">
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label class="col-sm-2 control-label" for="password">Senha<b class="required-field"> *</b></label>
+                  <div class="col-sm-3">
+                     <input type="password" class="form-control" id="password" name="password" v-model="user.password" >
+                  </div>
+               </div>
+               <div class="form-group">
+                  <label class="col-sm-2 control-label" for="profile">Perfil<b class="required-field"> *</b></label>
+                  <div class="col-sm-3">
+                     <select class="form-control" name="profile" id="profile" v-model="user.profile">
+                        <option value="ROLE_ADMIN">Administrador</option>
+                        <option value="ROLE_USER">Usuário</option>
+                     </select>
+                  </div>
+               </div>
             </div>
-            <div class="form-group row">
-              <label for="name" class="col-sm-2 col-form-label">Nome</label>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" id="name" ref="name" v-model="user.name">
-                </div>
+            <div class="box-footer">
+               <div class="col-sm-9 col-sm-offset-2">
+                  <button type="submit" class="btn btn-primary" @click.prevent="save"><i class="fa fa-save" aria-hidden="true"></i>&nbsp;Salvar</button>&nbsp;
+                  <button type="button" class="btn btn-default" @click.prevent="back"><i class="fa fa-mail-reply" aria-hidden="true"></i>&nbsp;Voltar</button>
+               </div>
             </div>
-            <div class="form-group row">
-              <label for="username" class="col-sm-2 col-form-label">Usuário</label>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" id="username" v-model="user.username">
-                </div>
-            </div>
-            <div class="form-group row">
-              <label for="password" class="col-sm-2 col-form-label">Senha</label>
-                <div class="col-sm-6">
-                  <input type="password" class="form-control" id="password" v-model="user.password">
-                </div>
-            </div>
-            <div class="form-group row">
-              <label for="profile" class="col-sm-2 col-form-label">Perfil</label>
-                <div class="col-sm-6">
-                  <select class="custom-select my-1 mr-sm-2" id="profile" v-model="user.profile">
-                    <option value="ROLE_ADMIN">Administrador</option>
-                    <option value="ROLE_USER">Usuário</option>
-                  </select>
-                </div>
-            </div>
-            <div class="form-group row">
-              <div class="col-sm-10">
-                <button type="submit" class="btn btn-primary" @click.prevent="save">Salvar</button>
-                <button type="button" class="btn btn-default" @click.prevent="back">Voltar</button>
-              </div>
-            </div>
-        </form>
-    </div>
+         </form>
+      </div>
+   </div>
 </template>
 
 <script>
@@ -56,7 +65,9 @@ export default {
     },
     data() {
         return {
-            user: {},
+            user: {
+              profile: 'ROLE_USER'
+            },
             userId: this.$route.params.id,
         }
     },
