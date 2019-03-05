@@ -122,9 +122,11 @@ export default {
             type: 'modal-primary',
             confirmText: 'Confirmar',
             cancelText: 'Cancelar',
-            confirmBefore: ()=> {},
-            confirmAfter: () => {
+            confirmBefore: ()=> {
                this.remove(item)
+            },
+            confirmAfter: () => {
+               
             },
             cancelBefore: () => {},
             cancelAfter: () => {},
