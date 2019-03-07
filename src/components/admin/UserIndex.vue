@@ -17,22 +17,26 @@
             <div class="row">
                <div class="col-md-3">
                   <label>Usuário</label>
-                  <input type="text" class="form-control" ref="username">
+                  <input type="text" class="form-control" ref="username" v-model="userSearch.username">
                </div>
                <div class="col-md-3">
                   <label>Nome</label>
-                  <input type="text" class="form-control">
+                  <input type="text" class="form-control" v-model="userSearch.name">
                </div>
                <div class="col-md-3">
                   <label>Perfil</label>
-                  <select class="form-control">
-                     <option value="">Selecione...</option>
+                  <select class="form-control" v-model="userSearch.profile">
+                     <option value="">Todos</option>
+                     <option value="ROLE_ADMIN">Administrador</option>
+                     <option value="ROLE_USER">Usuário</option>
                   </select>
                </div>
             </div>
          </div>
          <div class="box-footer text-center">
-            <button type="button" class="btn btn-primary"><i class="fa fa-search"></i>&nbsp;Pesquisar</button>
+            <button type="button" class="btn btn-primary" @click.prevent="search">
+               <i class="fa fa-search"></i>&nbsp;Pesquisar
+            </button>
          </div>
       </div>
       <div class="box box-default">
@@ -75,8 +79,11 @@ export default {
     data() {
         return {
             users: [],
+            userSearch: {
+               profile: ''
+            },
             currentPage: 1,
-            size: 5,
+            size: 10,
             totalElements: 0,
             fields: [
                 { key: 'id', label: 'ID', sortable: true, thStyle: 'width: 15%' },
@@ -91,7 +98,7 @@ export default {
         }
     },
     methods: {
-        fetchUsers() {
+        fetch() {
             const page = this.currentPage - 1
             const url = `${baseApiUrl}/users?page=${page}&size=${this.size}`
             axios.get(url)
@@ -100,6 +107,29 @@ export default {
                     this.totalElements = response.data.totalElements
                 })
                 .catch(showError)
+        },
+        search() {
+            const page = this.currentPage - 1
+            let url = `${baseApiUrl}/users?page=${page}&size=${this.size}`
+            url = this.fetchSearchUrl(url)
+            axios.get(url)
+                .then(response => {
+                    this.users = response.data.content
+                    this.totalElements = response.data.totalElements
+                })
+                .catch(showError)
+        },
+        fetchSearchUrl(url) {
+            if(this.userSearch.username !== undefined && this.userSearch.username.trim() !== "") {
+               url = url + `&username=${this.userSearch.username.trim()}`
+            }
+            if(this.userSearch.name !== undefined && this.userSearch.name.trim() !== "") {
+               url = url + `&name=${this.userSearch.name.trim()}`
+            }
+            if(this.userSearch.profile !== undefined && this.userSearch.profile !== "") {
+               url = url + `&profile=${this.userSearch.profile}`
+            }
+            return url
         },
         remove(item) {
             const userSession = this.user
@@ -111,7 +141,7 @@ export default {
             axios.delete(`${baseApiUrl}/users/${id}`)
                 .then(() => {
                     this.$toasted.global.defaultSuccess()
-                    this.fetchUsers()
+                    this.fetch()
                 })
                 .catch(showError)
         },
@@ -135,12 +165,12 @@ export default {
         },
     },
     mounted() {
-        this.fetchUsers()
+        this.fetch()
         this.$refs.username.focus()
     },
     watch: {
         currentPage() {
-            this.fetchUsers()
+            this.fetch()
         }
     }
 }
