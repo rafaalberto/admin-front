@@ -56,6 +56,9 @@
    }
 </script>
 <style>
+   #nprogress .bar {
+      background: gray !important;
+   }
    .text-font {
       font-family: 'Source Sans Pro','Helvetica Neue',Helvetica,Arial,sans-serif;
    }

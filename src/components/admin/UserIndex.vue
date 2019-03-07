@@ -46,7 +46,8 @@
             </h3>
          </div>
          <div class="box-body table-responsive">
-            <b-table responsive striped bordered :items="users" :fields="fields">
+            <b-table responsive striped bordered :items="users" :fields="fields" 
+               show-empty empty-text="Dados não encontrados">
                <template slot="edit" slot-scope="data">
                   <div class="text-center-align">
                      <router-link :to="{name: 'userForm', params: { id: data.item.id }}" class="mr-2 btn btn-primary">
@@ -58,6 +59,9 @@
                   <div class="text-center-align">
                      <b-button class="mr-2 btn btn-default" @click="openDeleteModal(data.item)"><i class="fa fa-remove"></i></b-button>
                   </div>
+               </template>
+               <template slot="empty" slot-scope="scope">
+                  <h4>{{scope.emptyText}}</h4>
                </template>
             </b-table>
             <div class="text-right">
@@ -72,6 +76,7 @@
 import axios from 'axios'
 import { baseApiUrl, showError } from '@/global'
 import { mapState } from 'vuex'
+import NProgress from 'nprogress'
 
 export default {
     name: 'UserIndex',
@@ -94,7 +99,7 @@ export default {
                     thStyle: 'width: 20%' },
                 { key: 'edit', label: 'Editar', thStyle: 'text-align: center; width: 5%' },
                 { key: 'delete', label: 'Excluir', thStyle: 'text-align: center; width: 5%' }
-            ]
+            ],
         }
     },
     methods: {
@@ -109,6 +114,7 @@ export default {
                 .catch(showError)
         },
         search() {
+            NProgress.start()
             const page = this.currentPage - 1
             let url = `${baseApiUrl}/users?page=${page}&size=${this.size}`
             url = this.fetchSearchUrl(url)
@@ -118,6 +124,7 @@ export default {
                     this.totalElements = response.data.totalElements
                 })
                 .catch(showError)
+                NProgress.done()
         },
         fetchSearchUrl(url) {
             if(this.userSearch.username !== undefined && this.userSearch.username.trim() !== "") {
@@ -132,6 +139,7 @@ export default {
             return url
         },
         remove(item) {
+            NProgress.start()
             const userSession = this.user
             if(userSession.username === item.username){
                 this.$toasted.global.defaultError({ msg: 'Usuário logado não pode ser excluído!' })
@@ -144,6 +152,7 @@ export default {
                     this.fetch()
                 })
                 .catch(showError)
+            NProgress.done()
         },
         openDeleteModal(item) {
             this.$bus.$emit('modal-open', {

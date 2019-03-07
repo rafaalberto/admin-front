@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import NProgress from 'nprogress'
 
 import Home from '@/components/home/Home'
 import UserIndex from '@/components/admin/UserIndex'
@@ -32,8 +33,7 @@ const routes = [{
 }]
 
 const router = new VueRouter({
-    mode: 'history',
-    routes
+    mode: 'history', routes
 })
 
 router.beforeEach((to, from, next) => {
@@ -46,6 +46,17 @@ router.beforeEach((to, from, next) => {
     } else {
         next()
     }
+})
+
+router.beforeResolve((to, from, next) => {
+    if (to.name) {
+        NProgress.start()
+    }
+    next()
+})
+
+router.afterEach(() => {
+    NProgress.done()
 })
 
 export default router
