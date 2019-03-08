@@ -16,16 +16,16 @@
          <div class="box-body">
             <div class="row">
                <div class="col-md-3">
-                  <label>Usuário</label>
-                  <input type="text" class="form-control" ref="username" v-model="userSearch.username">
+                  <label for="user">Usuário</label>
+                  <input type="text" id="user" class="form-control" ref="username" v-model="userSearch.username">
                </div>
                <div class="col-md-3">
-                  <label>Nome</label>
-                  <input type="text" class="form-control" v-model="userSearch.name">
+                  <label for="name">Nome</label>
+                  <input type="text" id="name" class="form-control" v-model="userSearch.name">
                </div>
                <div class="col-md-3">
-                  <label>Perfil</label>
-                  <select class="form-control" v-model="userSearch.profile">
+                  <label for="profile">Perfil</label>
+                  <select class="form-control" id="profile" v-model="userSearch.profile">
                      <option value="">Todos</option>
                      <option value="ROLE_ADMIN">Administrador</option>
                      <option value="ROLE_USER">Usuário</option>
