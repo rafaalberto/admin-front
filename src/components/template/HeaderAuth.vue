@@ -4,7 +4,11 @@
    </header>
 </template>
 
-<script></script>
+<script>
+   export default {
+      name: 'HeaderAuth'
+   }
+</script>
 
 <style scoped>
    .skin-blue .main-header .navbar {
