@@ -2,6 +2,7 @@
    <div id="app">
       <div id="wrapper" class="wrapper">
          <Header v-if="user" />
+         <HeaderAuth v-if="!user" />
          <Menu v-if="user" />
          <Loading v-if="validToken" />
          <Content v-else />
@@ -14,6 +15,7 @@
    import { baseApiUrl, userKey } from '@/global'
    import { mapState } from 'vuex'
    import Header from '@/components/template/Header'
+   import HeaderAuth from '@/components/template/HeaderAuth'
    import Menu from '@/components/template/Menu'
    import Loading from '@/components/template/Loading'
    import Content from '@/components/template/Content'
@@ -21,7 +23,7 @@
 
    export default {
      name: 'App',
-     components: { Header, Menu, Loading, Content, Modal },
+     components: { Header, HeaderAuth, Menu, Loading, Content, Modal },
      computed: mapState(['user']),
      data() {
        return {

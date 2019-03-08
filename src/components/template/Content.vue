@@ -15,7 +15,13 @@ export default {
 </script>
 
 <style>
-    .content-wrapper {
-        background: #FAFAFA;
+    .wrapper {
+        width: 100%;
+        min-height: 100%;
+        height: auto !important;
+        position: absolute;
+    }
+    .content-wrapper, .right-side {
+        background-color: #FAFAFA !important;
     }
 </style>
