@@ -1,29 +1,10 @@
-# admin-vue
+# Admin (Frontend) Application
+The reason of this app is learn how to make Single Page Application using VueJS. <br/>
+The App works saving and listing users registration and communicating with API REST. <br/>
+The main technologies are: <br/>
 
-## Project setup
-```
-yarn install
-```
+- VueJS (Frontend app)
+- Javascript ES6+
+- SPA concepts
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
-
-### Compiles and minifies for production
-```
-yarn run build
-```
-
-### Run your tests
-```
-yarn run test
-```
-
-### Lints and fixes files
-```
-yarn run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+To run this app is necessary run the backend application: https://github.com/rafaalberto/admin-api
